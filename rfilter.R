@@ -16,12 +16,15 @@
 # .: Examples :.
 # . rfilter -i test.ffr -d '\t' -q "type == 'f' & fsize > 8 & name %glob% 'myA*'" -o test_filter.ffr 
 # . # This will return all the records where type column is 'f' AND fsize column is > 8 AND name column matches the glob (wildcard) of 'myA*'
+# .: Dependencies :.
+# . In R REPL:
+# . % install.packages("data.table"); install.packages("getopt")
 # .: Installing :.
 # . append this into .bashrc:
 #  . alias rfilter="Rscript --vanilla <path_to_script>/rfilter.R"
 # .: Other :.
 # Author: Timothy C. Quinn
-# Home: <tbd>
+# Home: https://github.com/JavaScriptDude/rfilter
 # Licence: https://opensource.org/licenses/MIT
 #########################################
 # TODO:
