@@ -41,11 +41,12 @@ library(getopt, quietly = TRUE)
 ##############################OPTIONS##############################
 
 spec = matrix(c(
-'help'          , 'h', 0, "logical"   , "display help",
-'input'         , 'i', 1, "character" , "path to input file",
-'delim'         , 'd', 2, "character" , "field delimiter. Default is comma",
-'query'         , 'q', 1, "character" , "query expression to filer data",
-'output'        , 'o', 1, "character" , "path to output file."
+ 'help'          , 'h', 0, "logical"   , "display help"
+,'input'         , 'i', 1, "character" , "path to input file"
+,'delim'         , 'd', 2, "character" , "field delimiter. Default is comma"
+,'query'         , 'q', 1, "character" , "query expression to filer data"
+,'output'        , 'o', 1, "character" , "path to output file."
+,'subset'        , 's', 0, "logical"   , "return the records not included in query. Inverts the result."
 ), byrow=TRUE, ncol=5)
 
 opts = getopt(spec)
@@ -67,8 +68,8 @@ if(opts$delim=='\\t'){ opts$delim = '\t' }
 
 # Open csv and read into table
 df_all=data.table(read.csv(opts$input, sep=opts$delim, header=TRUE, stringsAsFactors=FALSE))
-# Parse query expression
-expr = paste("df_filter=df_all[",opts$query,"]", sep='')
+# Build / Parse query expression
+expr = paste("df_filter=df_all[",ifelse(opts$subset,"!(",""),opts$query,ifelse(opts$subset,")",""),"]", sep='')
 # Evaluate Query expression
 eval(parse(text=expr))
 # Write output
