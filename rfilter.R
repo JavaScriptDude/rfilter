@@ -27,6 +27,7 @@
 # TODO:
 # . Implement writing to stdout
 # . Implement handling of dates
+# . Make usage output nicer
 ########################################
 
 ##############################IMPORTS##############################
@@ -71,3 +72,4 @@ eval(parse(text=expr))
 write.table(df_filter, opts$output, sep=opts$delim, row.names=FALSE)
 
 cat("File written to: ", opts$output, "\n")
+
